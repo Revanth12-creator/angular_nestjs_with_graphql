@@ -1,0 +1,138 @@
+
+<kendo-card width="100%">
+  <kendo-dialog
+    title="Please confirm"
+    *ngIf="dialogOpened"
+    (close)="closeDialog()"
+    [minWidth]="250"
+    [width]="450"
+    style="display: flex; justify-content: center; margin-top: 5rem"
+  >
+    <div>
+      <form class="k-form" [formGroup]="form" (ngSubmit)="addStudent()">
+        <fieldset class="k-form-fieldset">
+          <kendo-formfield>
+            <kendo-label [for]="name" text=" Name"></kendo-label>
+            <kendo-textbox
+              formControlName="name"
+              [clearButton]="true"
+              #name
+              required
+            ></kendo-textbox>
+            <kendo-formerror>Error: Last name is required</kendo-formerror>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="email" text="Email"></kendo-label>
+            <kendo-textbox
+              formControlName="email"
+              [clearButton]="true"
+              #email
+              required
+            ></kendo-textbox>
+            <kendo-formerror>Error: Email is required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="dob" text="Date of Birth"></kendo-label>
+            <kendo-datepicker
+              calendarType="infinite"
+              formControlName="dob"
+              #dob
+              required
+            ></kendo-datepicker>
+            
+            <kendo-formerror>Error: Date of Birth is required</kendo-formerror>
+          </kendo-formfield>
+          <kendo-dialog-actions class="k-form-buttons">
+            <button kendoButton k-button (click)="clearForm()">Clear</button>
+            <button kendoButton k-button type="submit" [primary]="true">
+              Submit
+            </button>
+          </kendo-dialog-actions>
+        </fieldset>
+      </form>
+    </div>
+  </kendo-dialog>
+
+  
+  <div class="header">
+    <button (click)="clearForm()"
+      class="k-button add"
+      *ngIf="!dialogOpened"
+      (click)="openDialog()"
+      kendoButton
+    >
+      Add Student
+    </button>
+    <kendo-upload class="file" [autoUpload]="false" (upload)="onUpload($event)">
+    </kendo-upload>
+  </div>
+  <kendo-card-body>
+    <br />
+    <kendo-grid class="main"
+      [data]="students"
+      [height]="450"
+      (edit)="editHandler($event)"
+      (save)="saveHandler($event)"
+      [pageSize]="pageSize"
+      [skip]="skip"
+      [pageable]="true"
+      (pageChange)="pageChange($event)"
+    >
+      <kendo-grid-column field="name" title="First Name" editor="text">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{ dataItem.name }}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="email" title="Email" editor="text">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{ dataItem.email }}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="dob" title="Date of birth" editor="text">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{ dataItem.dateofbirth | date }}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="age" title="Age">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{ dataItem.age }}
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-command-column title="Action">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <button
+            style="background-color: #2d5f55;"
+            kendoGridEditCommand
+            kendoButton
+            [look]="'outline'"
+            [primary]="true"
+            class="k-button update"
+          >
+            Edit
+          </button>
+          <button
+            kendoGridSaveCommand
+            kendoButton
+            [look]="'outline'"
+            [primary]="false"
+            class="k-button update"
+          >
+            Save
+          </button>
+          <button style="background-color: #864836;"
+            kendoButton
+            [primary]="true"
+            (click)="deleteStudent(dataItem.id)"
+            class="k-button delete"
+            look="outline"
+            
+          >
+            Delete
+          </button>
+        </ng-template>
+      </kendo-grid-command-column>
+    </kendo-grid>
+  </kendo-card-body>
+</kendo-card>

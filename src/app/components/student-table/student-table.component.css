@@ -1,0 +1,34 @@
+.main {
+  margin: 0 auto;
+  width: 80%;
+}
+.mainComponent {
+  background-color: aliceblue;
+}
+.delete {
+  background-color: #f07971;
+  margin-left: 1rem;
+  color: black;
+}
+.update {
+  background-color: #e6f1f1;
+  color: black;
+}
+.b {
+  display: flex;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+.header {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.add {
+  margin-left: 180px;
+  background-color: lightgray;
+}
+.file {
+  float: end;
+  margin-left: 35rem;
+  background-color: rgb(211, 217, 228);
+}

@@ -1,0 +1,32 @@
+li {
+  list-style-type: none;
+  display: inline;
+}
+.home {
+  margin-left: 50px;
+  padding: 7px;
+  border: black;
+  background-color: azure;
+  border-radius: 3px;
+  width: 50px;
+}
+.students {
+  position: relative;
+  left: 20px;
+  padding: 7px;
+  border: black;
+  background-color: azure;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.home,
+.students:hover {
+  background-color: lightgray;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  margin-top: 10px;
+  margin-right: 967px;
+}
